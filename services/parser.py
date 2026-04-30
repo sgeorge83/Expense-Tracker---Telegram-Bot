@@ -28,9 +28,9 @@ def categorize(text: str) -> str:
 
 
 def parse_text_expense(text: str) -> ParsedExpense | None:
-    match = re.search(r"([+-]?\d+(?:\.\d+)?)", text)
+    match = re.findall(r"([+-]?\d+(?:\.\d+)?)", text)
     if not match:
         return None
-    amount = float(match.group(1))
+    amount = float(match.group(-1))
     category = categorize(text)
     return ParsedExpense(amount=amount, category=category, description=text.strip())
